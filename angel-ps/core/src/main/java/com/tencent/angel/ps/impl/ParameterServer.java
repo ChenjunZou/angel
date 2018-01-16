@@ -80,10 +80,10 @@ public class ParameterServer {
   private Thread heartbeatThread;
   private MatrixPartitionManager matrixPartitionManager;
 
-  private MatrixCommitter commiter;
+  private MatrixCommitter committer;
 
   private static final AtomicInteger runningWorkerGroupNum = new AtomicInteger(0);
-  private static final AtomicInteger runningWorekrNum = new AtomicInteger(0);
+  private static final AtomicInteger runningWorkerNum = new AtomicInteger(0);
   private static final AtomicInteger runningTaskNum = new AtomicInteger(0);
 
   public static int getRunningWorkerGroupNum() {
@@ -91,7 +91,7 @@ public class ParameterServer {
   }
 
   public static int getRunningWorkerNum() {
-    return runningWorekrNum.get();
+    return runningWorkerNum.get();
   }
 
   public static int getRunningTaskNum() {
@@ -103,7 +103,7 @@ public class ParameterServer {
   }
 
   public static void setRunningWorkerNum(int num) {
-    runningWorekrNum.set(num);
+    runningWorkerNum.set(num);
   }
 
   public static void setRunningTaskNum(int num) {
@@ -303,7 +303,7 @@ public class ParameterServer {
     LOG.info("Initialize a parameter server");
 
     matrixPartitionManager = new MatrixPartitionManager();
-    commiter = new MatrixCommitter(this);
+    committer = new MatrixCommitter(this);
     TConnection connection = TConnectionManager.getConnection(conf);
     try {
       masterProxy = connection.getMasterService(masterLocation.getIp(), masterLocation.getPort());
@@ -319,7 +319,7 @@ public class ParameterServer {
     snapshotManager.init();
   }
 
-  private void startHeartbeart() {
+  private void startHeartbeat() {
     final int heartbeatInterval =
         conf.getInt(AngelConfiguration.ANGEL_PS_HEARTBEAT_INTERVAL_MS,
             AngelConfiguration.DEFAULT_ANGEL_PS_HEARTBEAT_INTERVAL_MS);
@@ -349,7 +349,7 @@ public class ParameterServer {
   }
 
   private void register() throws IOException {
-    LOG.info("Registing to AppMaster " + masterLocation);
+    LOG.info("Registering to AppMaster " + masterLocation);
     PSRegisterRequest.Builder regBuilder = PSRegisterRequest.newBuilder();
     regBuilder.setPsAttemptId(attemptIdProto);
     try {    
@@ -413,7 +413,7 @@ public class ParameterServer {
           LOG.info("received ps commit command, ps is committing now!");
           LOG.info("to stop taskSnapshotsThread.");
           snapshotManager.stop();
-          commiter.commit(ret.getNeedCommitMatrixIdsList());
+          committer.commit(ret.getNeedCommitMatrixIdsList());
           break;
           
         default:
@@ -448,7 +448,7 @@ public class ParameterServer {
     matrixTransportServer.start();
 
     register();
-    startHeartbeart();
+    startHeartbeat();
     snapshotManager.start();
   }
 

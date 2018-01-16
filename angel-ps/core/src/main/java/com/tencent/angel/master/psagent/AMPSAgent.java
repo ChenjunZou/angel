@@ -285,9 +285,9 @@ public class AMPSAgent implements EventHandler<AMPSAgentEvent> {
     @SuppressWarnings("unchecked")
     @Override
     public void transition(AMPSAgent psAgent, AMPSAgentEvent event) {
-      StringBuilder psdiaggostic = new StringBuilder();
-      psdiaggostic.append("ps agent is killed by user, psId: ").append(psAgent.getId().toString());
-      psAgent.diagnostics.add(psdiaggostic.toString());
+      StringBuilder psdiagostic = new StringBuilder();
+      psdiagostic.append("ps agent is killed by user, psId: ").append(psAgent.getId().toString());
+      psAgent.diagnostics.add(psdiagostic.toString());
       for (PSAgentAttempt attempt : psAgent.getAttempts().values()) {
         if (attempt != null && !attempt.isFinished()) {
           psAgent

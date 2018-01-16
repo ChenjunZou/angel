@@ -246,9 +246,9 @@ public class PSManagerTest {
     ParameterServerManager psManager = angelAppMaster.getAppContext().getParameterServerManager();
     AMParameterServer amPs = psManager.getParameterServer(psId);
     PSAttempt psAttempt = amPs.getPSAttempt(psAttempt0Id);
-    Map<String, String> metrices = psAttempt.getMetrices();
-    assertTrue(metrices.get("ps_key1").equals("100"));
-    assertTrue(metrices.get("ps_key2").equals("200"));
+    Map<String, String> metrics = psAttempt.getMetrics();
+    assertTrue(metrics.get("ps_key1").equals("100"));
+    assertTrue(metrics.get("ps_key2").equals("200"));
 
     PSAttemptId psAttempt1Id = new PSAttemptId(psId, 1);
     builder.setPsAttemptId(ProtobufUtil.convertToIdProto(psAttempt1Id));

@@ -123,7 +123,7 @@ public class PSAgentManager implements EventHandler<PSAgentManagerEvent> {
       }
 
       case PSAGENT_DONE: {
-        psAgentSucess(event);
+        psAgentSuccess(event);
         break;
       }
 
@@ -167,7 +167,7 @@ public class PSAgentManager implements EventHandler<PSAgentManagerEvent> {
     context.getEventHandler().handle(new AppEvent(context.getApplicationId(), AppEventType.KILL));
   }
 
-  private void psAgentSucess(PSAgentManagerEvent event) {
+  private void psAgentSuccess(PSAgentManagerEvent event) {
     successPSAgentMap.put(event.getPsAgentId(), psAgentMap.get(event.getPsAgentId()));
     if (successPSAgentMap.size() == psAgentMap.size()) {
       LOG.info("all psagent is done, now commit the matries");

@@ -373,7 +373,7 @@ public class PSAttempt implements EventHandler<PSAttemptEvent> {
       SingleArcTransition<PSAttempt, PSAttemptEvent> {
     @SuppressWarnings("unchecked")
     @Override
-    public void transition(PSAttempt psAttempt, PSAttemptEvent evnt) {
+    public void transition(PSAttempt psAttempt, PSAttemptEvent event) {
       // set the launch time
       psAttempt.launchTime = psAttempt.getContext().getClock().getTime();
 
@@ -386,7 +386,7 @@ public class PSAttempt implements EventHandler<PSAttemptEvent> {
 
       // add the ps attempt to the heartbeat timeout monitoring list
       psAttempt.getContext().getMasterService().registerPSAttemptId(psAttempt.attemptId);
-      LOG.info("has telled attempt started for attempid: " + psAttempt.attemptId);
+      LOG.info("has told attempt started for attempt id: " + psAttempt.attemptId);
     }
   }
 
@@ -577,7 +577,7 @@ public class PSAttempt implements EventHandler<PSAttemptEvent> {
    * 
    * @return Map<String, String> ps attempt metrices
    */
-  public Map<String, String> getMetrices() {
+  public Map<String, String> getMetrics() {
     try {
       readLock.lock();
       Map<String, String> cloneMetrices = new HashMap<String, String>();

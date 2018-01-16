@@ -270,10 +270,10 @@ public class AMParameterServer implements EventHandler<AMParameterServerEvent> {
     @SuppressWarnings("unchecked")
     @Override
     public void transition(AMParameterServer parameterServer, AMParameterServerEvent event) {
-      StringBuilder psdiaggostic = new StringBuilder();
-      psdiaggostic.append("ps is killed by user, psId: ")
+      StringBuilder psDiagostic = new StringBuilder();
+      psDiagostic.append("ps is killed by user, psId: ")
           .append(parameterServer.getId().toString());
-      parameterServer.diagnostics.add(psdiaggostic.toString());
+      parameterServer.diagnostics.add(psDiagostic.toString());
       for (PSAttempt attempt : parameterServer.attempts.values()) {
         if (attempt != null && !attempt.isFinished()) {
           parameterServer.getContext().getEventHandler()

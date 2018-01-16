@@ -489,7 +489,7 @@ public class AngelApplicationMaster extends CompositeService {
     LOG.info("start to write app state to file " + interalStatePath);
 
     if (interalStatePath == null) {
-      LOG.error("can not find app state serilize file, exit");
+      LOG.error("can not find app state serialize file, exit");
       return;
     }
 
@@ -500,7 +500,7 @@ public class AngelApplicationMaster extends CompositeService {
     }
 
     FSDataOutputStream out = fs.create(stateFilePath);
-    appContext.getApp().serilize(out);
+    appContext.getApp().serialize(out);
     out.flush();
     out.close();
 
@@ -600,7 +600,7 @@ public class AngelApplicationMaster extends CompositeService {
   }
 
   /**
-   * init and start all service modules for angel applicaiton master.
+   * init and start all service modules for angel application master.
    */
   public void initAndStart() throws IOException {
     addIfService(angelApp);
@@ -614,10 +614,10 @@ public class AngelApplicationMaster extends CompositeService {
     addIfService(appStateStorage);
     LOG.info("build app state storage success");
 
-    // init event dispacher
+    // init event dispatcher
     dispatcher = new AsyncDispatcher();
     addIfService(dispatcher);
-    LOG.info("build event dispacher");
+    LOG.info("build event dispatcher");
 
     // init location manager
     locationManager = new LocationManager(appContext);

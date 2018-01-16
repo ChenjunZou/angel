@@ -608,7 +608,7 @@ public class PSAgent {
    */
   public void error(String errorMsg) {
     if (!exitedFlag.getAndSet(true)) {
-      LOG.info("psagent falied");
+      LOG.info("psagent failed");
 
       // Notify run success to master only on ANGEL_PS_PSAGENT running mode
       RunningMode mode = PSAgentContext.get().getRunningMode();

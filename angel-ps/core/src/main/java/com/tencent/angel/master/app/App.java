@@ -252,7 +252,7 @@ public class App extends AbstractService implements EventHandler<AppEvent> {
    * 
    * @param out output stream
    */
-  public void serilize(FSDataOutputStream out) throws IOException {
+  public void serialize(FSDataOutputStream out) throws IOException {
     GetJobReportResponse jobState = getJobReportResponse();
     jobState.writeTo(out);
     LOG.info("write app report to file successfully " + jobState);

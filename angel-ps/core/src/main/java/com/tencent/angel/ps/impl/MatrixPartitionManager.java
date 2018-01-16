@@ -304,7 +304,7 @@ public class MatrixPartitionManager {
   /**
    * Get matrix use matrix id
    * 
-   * @param integer matrix id
+   * @param matrixId matrix id
    * @return ServerMatrix matrix
   */      
   public ServerMatrix getMatrix(int matrixId) {
